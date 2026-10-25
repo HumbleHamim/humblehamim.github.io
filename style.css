@@ -73,3 +73,33 @@ footer{padding:30px 0;color:var(--ash);font-size:.92rem}
   .hero .wrap{padding-top:70px;padding-bottom:80px}
   section{padding:60px 0}
 }
+
+/* sprout */
+#sprout{position:absolute;right:max(24px,calc((100% - 1040px)/2 + 24px));bottom:0;width:192px;height:256px;image-rendering:pixelated;pointer-events:none}
+@media(max-width:760px){#sprout{width:120px;height:160px;right:12px;opacity:.9}}
+
+/* scroll progress */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--green);transform:scaleX(0);transform-origin:left;z-index:20}
+
+/* custom cursor (pixel trail) */
+.tr{position:fixed;left:0;top:0;pointer-events:none;z-index:99;background:var(--green);will-change:transform}
+.tr.head{transition:width .15s,height .15s,background .15s,margin .15s}
+.tr.head.big{width:34px!important;height:34px!important;margin:-10px 0 0 -10px;background:transparent;border:2px solid var(--green)}
+
+/* load-in + scroll reveal */
+.w{display:inline-block;animation:wordIn .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wordIn{from{opacity:0;transform:translateY(.6em)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hello{animation:fadeUp .7s both}
+.motto{animation:fadeUp .8s .7s both}
+.btns{animation:fadeUp .8s .95s both}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+.card{transition:border-color .2s,transform .25s}
+.card:hover{transform:translateY(-4px)}
+.btn{transition:background .2s,border-color .2s,transform .2s}
+.btn:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){
+  .w,.hello,.motto,.btns{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+}
