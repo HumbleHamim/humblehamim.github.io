@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hamim Ahmed | Portfolio</title>
 <meta name="description" content="Hamim Ahmed, Data Science student building AI tools and applied software.">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,14 +15,18 @@
 <div id="bar"></div>
 
 <header>
-  <div class="wrap">
-    <a class="logo" href="#top">Hamim Ahmed</a>
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Hamim Ahmed, back to top"><img src="logo.png" width="546" height="92" alt="humble.breeze"></a>
     <nav aria-label="Main">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
-      <a href="#work">Work</a>
       <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
+      <button class="theme" id="theme" type="button" aria-label="Switch to day theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13.5A9 9 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg>
+      </button>
     </nav>
   </div>
 </header>
@@ -88,6 +93,26 @@
   </div>
 </section>
 
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div>
+        <h3>Build</h3>
+        <ul><li>HTML, CSS, JavaScript</li><li>Python</li><li>AI tooling</li></ul>
+      </div>
+      <div>
+        <h3>Data</h3>
+        <ul><li>Data science fundamentals</li><li>Data annotation</li><li>Bengali and English</li></ul>
+      </div>
+      <div>
+        <h3>Design</h3>
+        <ul><li>Canva</li><li>Posters and social media</li><li>Interface details</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="work">
   <div class="wrap">
     <h2>Work</h2>
@@ -132,26 +157,6 @@
   </div>
 </section>
 
-<section id="skills">
-  <div class="wrap">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div>
-        <h3>Build</h3>
-        <ul><li>HTML, CSS, JavaScript</li><li>Python</li><li>AI tooling</li></ul>
-      </div>
-      <div>
-        <h3>Data</h3>
-        <ul><li>Data science fundamentals</li><li>Data annotation</li><li>Bengali and English</li></ul>
-      </div>
-      <div>
-        <h3>Design</h3>
-        <ul><li>Canva</li><li>Posters and social media</li><li>Interface details</li></ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="contact" class="contact">
   <div class="wrap">
     <h2>Let's talk</h2>
@@ -169,7 +174,7 @@
 </main>
 
 <footer>
-  <div class="wrap">&copy; <span id="yr"></span> Hamim Ahmed</div>
+  <div class="wrap">&copy; Hamim Ahmed | 2020 | Built with caffeine, curiosity, and too many open tabs.</div>
 </footer>
 
 <script src="script.js"></script>
