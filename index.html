@@ -1,15 +1,129 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hamim | Personal Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hamim Ahmed | Portfolio</title>
+<meta name="description" content="Hamim Ahmed, Data Science student building AI tools and applied software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hi, I'm Hamim!</h1>
-  <p>Welcome to my personal portfolio website.</p>
-  <p>Data Science Student | AI Enthusiast</p>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Hamim Ahmed</a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <canvas id="grid" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="hello">Hi, I'm Hamim Ahmed.</p>
+    <h1>I build AI tools and careful interfaces.</h1>
+    <blockquote class="motto">Chasing Pixel Perfection while letting my Creations take the center stage.</blockquote>
+    <div class="btns">
+      <a class="btn main" href="#projects">See my projects</a>
+      <a class="btn alt" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>About me</h2>
+      <p>I'm a first-year Data Science student in Bangladesh. I like turning ideas into working software, especially tools that use AI to solve a real, everyday problem.</p>
+      <p>I care about how things look as much as how they work. Clean layout, sharp details, and a result people enjoy using.</p>
+    </div>
+    <ul class="facts">
+      <li><span>Studying</span><span>Data Science</span></li>
+      <li><span>Based in</span><span>Bangladesh</span></li>
+      <li><span>Focus</span><span>AI tools, web, design</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="cards">
+
+      <!-- PROJECT CARD: copy this block to add a new project -->
+      <article class="card">
+        <h3>MU Live Bus Tracker</h3>
+        <p>A live bus tracking tool for university students, so they can see where the bus is before they leave.</p>
+        <div class="tags"><span>Web</span><span>Live tracking</span></div>
+        <a href="https://github.com/MrHamim1050">View on GitHub</a>
+      </article>
+
+      <article class="card">
+        <h3>Uchcharonai</h3>
+        <p>A Bangla speech and phoneme-check tool that helps people practice and check pronunciation. Built with team Kirrhadia.</p>
+        <div class="tags"><span>Speech</span><span>Bangla</span><span>AI</span></div>
+        <a href="https://github.com/MrHamim1050">View on GitHub</a>
+      </article>
+      <!-- END PROJECT CARD -->
+
+      <article class="card empty">
+        <h3>Next project</h3>
+        <p>More coming soon.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div>
+        <h3>Build</h3>
+        <ul><li>HTML, CSS, JavaScript</li><li>Python</li><li>AI tooling</li></ul>
+      </div>
+      <div>
+        <h3>Data</h3>
+        <ul><li>Data science fundamentals</li><li>Data annotation</li><li>Bengali and English</li></ul>
+      </div>
+      <div>
+        <h3>Design</h3>
+        <ul><li>Canva</li><li>Posters and social media</li><li>Interface details</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let's talk</h2>
+    <p>Have a project, an idea, or an opportunity? Send me a message and I'll reply as soon as I can.</p>
+    <div class="links">
+      <a class="btn main" href="mailto:you@example.com">Email me</a>
+      <a class="btn alt" href="https://www.linkedin.com/in/humblehamim" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn alt" href="https://github.com/MrHamim1050" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn alt" href="https://www.instagram.com/humble.breeze" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn alt" href="https://www.tiktok.com/@humble.breeze" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="yr"></span> Hamim Ahmed</div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-  
