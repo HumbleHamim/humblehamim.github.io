@@ -1,18 +1,4 @@
-function isLight() { return document.documentElement.dataset.theme === 'light'; }
-
-/* 0. Day / night theme switch */
-(function () {
-  var b = document.getElementById('theme'), r = document.documentElement;
-  function label() { b.setAttribute('aria-label', isLight() ? 'Switch to night theme' : 'Switch to day theme'); }
-  label();
-  b.addEventListener('click', function () {
-    var t = isLight() ? 'dark' : 'light';
-    r.dataset.theme = t;
-    try { localStorage.setItem('theme', t); } catch (e) {}
-    label();
-    dispatchEvent(new Event('themechange'));
-  });
-})();
+document.getElementById('yr').textContent = new Date().getFullYear();
 var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 var mouse = { x: innerWidth / 2, y: innerHeight / 2 };
 addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -39,7 +25,7 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
     var any = false;
     for (var k in cells) {
       var p = k.split(',');
-      ctx.fillStyle = (isLight() ? 'rgba(31,122,78,' : 'rgba(111,207,151,') + (cells[k].a * 0.45).toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(111,207,151,' + (cells[k].a * 0.45).toFixed(3) + ')';
       ctx.fillRect(p[0] * S + 1, p[1] * S + 1, S - 1, S - 1);
       cells[k].a -= 0.016;
       if (cells[k].a <= 0) delete cells[k]; else any = true;
@@ -72,7 +58,6 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
   c.width = W * P; c.height = H * P;
   function px(gx, gy, col) { x.fillStyle = col; x.fillRect(gx * P, gy * P, P, P); }
   var leaves = [[7, -1], [11, 1], [15, -1], [19, 1]];
-  var L1, L2;
   function frame(now) {
     var t = (now - t0) / 1000, g = still ? 1 : Math.min(1, t / 3.4);
     g = 1 - Math.pow(1 - g, 3);
@@ -80,7 +65,6 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
     var target = Math.max(-1, Math.min(1, (mouse.x - (r.left + r.width / 2)) / 500));
     lean += (target - lean) * 0.05;
     var sway = still ? 0 : Math.sin(t * 1.4);
-    L1 = isLight() ? '#2f9e66' : '#6fcf97'; L2 = isLight() ? '#6fcf97' : '#a9ecc4';
     x.clearRect(0, 0, c.width, c.height);
     for (var i = 6; i <= 17; i++) { px(i, 30, '#4a524e'); px(i, 31, '#3a413e'); }
     for (i = 8; i <= 15; i++) px(i, 29, '#5b645f');
@@ -92,19 +76,18 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
       var s = Math.min(1, (h - L[0] - 2) / 5), n = Math.max(2, Math.round(s * 4));
       var ox = off(L[0]) + cx + (L[1] > 0 ? 2 : -1), y = base - L[0];
       for (var j = 0; j < n; j++) {
-        px(ox + L[1] * j, y - (j > 1 ? 1 : 0), L1);
-        if (j > 0) px(ox + L[1] * j, y - 1 - (j > 1 ? 1 : 0), L2);
+        px(ox + L[1] * j, y - (j > 1 ? 1 : 0), '#6fcf97');
+        if (j > 0) px(ox + L[1] * j, y - 1 - (j > 1 ? 1 : 0), '#a9ecc4');
       }
     });
     if (h > 20) {
       var tx = cx + off(h - 1), ty = base - h;
-      px(tx, ty, L2); px(tx + 1, ty, L2); px(tx, ty - 1, L1); px(tx + 1, ty - 1, L1);
-      px(tx - 1, ty + 1, L1); px(tx + 2, ty + 1, L1);
+      px(tx, ty, '#a9ecc4'); px(tx + 1, ty, '#a9ecc4'); px(tx, ty - 1, '#6fcf97'); px(tx + 1, ty - 1, '#6fcf97');
+      px(tx - 1, ty + 1, '#6fcf97'); px(tx + 2, ty + 1, '#6fcf97');
     }
     if (!still) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
-  if (still) addEventListener('themechange', function () { frame(performance.now()); });
 })();
 
 /* 3. Pixel cursor trail (mouse devices only) */
