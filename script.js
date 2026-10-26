@@ -138,3 +138,16 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
     io.observe(el);
   });
 })();
+
+/* 5. "View all pages" dropdown */
+(function () {
+  var b = document.querySelector('.more'), p = document.getElementById('pages-panel');
+  if (!b || !p) return;
+  b.addEventListener('click', function () {
+    var open = p.hidden;
+    p.hidden = !open;
+    b.setAttribute('aria-expanded', open);
+    b.textContent = open ? 'Hide pages' : 'View all pages';
+    if (open) p.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+  });
+})();

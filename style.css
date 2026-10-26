@@ -44,14 +44,14 @@ h2{font:700 clamp(1.8rem,4vw,2.5rem)/1.15 var(--display);letter-spacing:-.015em;
 .facts span:first-child{color:var(--ash)}
 
 /* projects */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),300px));gap:20px;justify-content:start}
-.card{height:350px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),300px));gap:20px;justify-content:start;grid-auto-rows:1fr}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s}
 .card:hover{border-color:var(--green-deep)}
 .card h3{font:700 1.3rem var(--display)}
-.card p{color:var(--ash);flex:1;font-size:.97rem;line-height:1.6}
+.card p{color:var(--ash);font-size:.97rem;line-height:1.6}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tags span{font-size:.85rem;padding:3px 11px;border-radius:99px;background:#2d3331;color:var(--silver)}
-.card a{color:var(--green);font-weight:600;text-decoration:none}
+.card a,.more{color:var(--green);font-weight:600;text-decoration:none}
 .card a:hover{text-decoration:underline}
 .card.empty{border-style:dashed;background:transparent}
 .card.empty h3{color:var(--ash)}
@@ -108,3 +108,12 @@ footer{padding:30px 0;color:var(--ash);font-size:.92rem}
 
 @media(max-width:700px){.cards{justify-content:center}}
 @media(max-width:560px){.logo{display:none}header .wrap{justify-content:center}nav{gap:12px}nav a{font-size:.9rem}}
+
+.card{gap:12px}
+.more{background:none;border:0;padding:0;font:inherit;font-weight:600;cursor:pointer;text-align:left;width:max-content}
+.more:hover{text-decoration:underline}
+.panel{margin-top:40px;padding-top:30px;border-top:1px solid var(--line)}
+.panel[hidden]{display:none}
+.panel>h3{font:700 1.3rem var(--display);margin-bottom:20px}
+.cards.compact{grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),260px))}
+.cards.compact .card{padding:20px}
