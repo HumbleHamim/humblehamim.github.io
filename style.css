@@ -142,3 +142,12 @@ header nav{margin-left:auto}
 
 /* contact icons */
 .links .btn i{margin-right:8px}
+
+/* logo swoosh lines continue to both ends of the navbar */
+header{overflow:hidden}
+.logo{position:relative;--ly:78%}
+.logo::before,.logo::after{content:"";position:absolute;top:var(--ly);height:1.5px;width:100vw;background:var(--silver);pointer-events:none}
+.logo::before{right:100%}
+.logo::after{left:100%}
+.logo.nologo::before,.logo.nologo::after{display:none}
+header nav{position:relative;z-index:1}
