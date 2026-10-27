@@ -130,26 +130,24 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
 
   if (still || !('IntersectionObserver' in window)) return;
   var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); (function (t) { setTimeout(function () { t.style.transitionDelay = ''; }, 900); })(e.target); } });
   }, { threshold: 0.15 });
-  document.querySelectorAll('section h2,.about p,.facts li,.card,.skills>div,.contact p,.links').forEach(function (el, i) {
+  document.querySelectorAll('section h2,.about p,.facts>div,.card,.skills>div,.contact p,.links').forEach(function (el, i) {
     el.classList.add('rv');
     el.style.transitionDelay = ((i % 3) * 90) + 'ms';
     io.observe(el);
   });
 })();
 
-/* 5. Facebook card expands in place */
+/* 5. "View all pages" dropdown */
 (function () {
-  var card = document.querySelector('.card.fbcard');
-  var b = card && card.querySelector('.more'), p = document.getElementById('pages-panel');
+  var b = document.querySelector('.more'), p = document.getElementById('pages-panel');
   if (!b || !p) return;
   b.addEventListener('click', function () {
     var open = p.hidden;
     p.hidden = !open;
-    card.classList.toggle('open', open);
     b.setAttribute('aria-expanded', open);
     b.textContent = open ? 'Hide pages' : 'View all pages';
-    if (open) card.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+    if (open) p.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
   });
 })();
