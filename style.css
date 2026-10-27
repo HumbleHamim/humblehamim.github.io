@@ -1,5 +1,5 @@
 :root{
-  --bg:#1b1e1d; --surface:#232726; --line:#343a37;
+  --bg:#1b1e1d; --head:rgba(27,30,29,.88); --surface:#232726; --line:#343a37;
   --ash:#9ba39f; --silver:#dde2df; --green:#6fcf97; --green-deep:#2f6b4f;
   --display:'Bricolage Grotesque','Segoe UI',Arial,sans-serif;
   --body:'Figtree','Segoe UI',Arial,sans-serif;
@@ -12,7 +12,7 @@ a{color:inherit}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 
 /* nav */
-header{position:sticky;top:0;z-index:5;background:rgba(27,30,29,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:5;background:var(--head);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
 .logo{font:700 1.15rem var(--display);text-decoration:none}
 nav{display:flex;gap:22px}
@@ -44,7 +44,7 @@ h2{font:700 clamp(1.8rem,4vw,2.5rem)/1.15 var(--display);letter-spacing:-.015em;
 .facts span:first-child{color:var(--ash)}
 
 /* projects */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:20px;justify-content:start;align-items:start;grid-auto-flow:dense}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:20px;justify-content:start;align-items:stretch;grid-auto-flow:dense}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s}
 .card:hover{border-color:var(--green-deep)}
 .card h3{font:700 1.3rem var(--display)}
@@ -146,8 +146,33 @@ header nav{margin-left:auto}
 /* logo swoosh lines continue to both ends of the navbar */
 header{overflow:hidden}
 .logo{position:relative;--ly:78%}
-.logo::before,.logo::after{content:"";position:absolute;top:var(--ly);height:1.5px;width:100vw;background:var(--silver);pointer-events:none}
-.logo::before{right:100%}
-.logo::after{left:100%}
-.logo.nologo::before,.logo.nologo::after{display:none}
 header nav{position:relative;z-index:1}
+
+/* logo lines: measured from logo.png by script.js */
+.ln{position:absolute;width:100vw;pointer-events:none}
+.logo.fallback::before,.logo.fallback::after{content:"";position:absolute;top:78%;height:1.5px;width:100vw;background:var(--silver);pointer-events:none}
+.logo.fallback::before{right:100%}
+.logo.fallback::after{left:100%}
+
+/* day / night switch */
+body{transition:background .3s,color .3s}
+.theme-btn{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--silver);cursor:pointer;font-size:1rem;position:relative;z-index:1;transition:border-color .2s,color .2s}
+.theme-btn:hover{border-color:var(--green);color:var(--green)}
+:root[data-theme="light"]{--bg:#f2f4f3;--head:rgba(242,244,243,.88);--surface:#ffffff;--line:#d3d9d5;--ash:#59635d;--silver:#1b2420;--green:#1f8a56;--green-deep:#9bd3b4}
+[data-theme="light"] .tags span,[data-theme="light"] .certs summary span{background:#e3e8e5}
+[data-theme="light"] .btn.main{color:#fff}
+[data-theme="light"] .btn.main:hover{background:#25a368}
+[data-theme="light"] .logo img,[data-theme="light"] .ln{filter:invert(1)}
+
+/* small screens: logo + switch on the first row, links on the second */
+header .bar-in{flex-wrap:wrap}
+@media(max-width:600px){
+  header .bar-in{height:auto;padding-top:8px;padding-bottom:6px;row-gap:4px}
+  .logo img{height:30px}
+  .theme-btn{margin-left:auto;width:34px;height:34px}
+  header nav{order:3;width:100%;margin-left:0;justify-content:space-between}
+}
+
+/* icon-only contact buttons */
+.links .btn.icon{width:52px;height:52px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:1.25rem}
+.links .btn.icon i{margin:0}

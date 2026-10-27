@@ -153,3 +153,72 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
     if (open) card.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
   });
 })();
+
+/* 6. Logo lines: read the real end points of the swooshes from logo.png so they join exactly */
+(function () {
+  var logo = document.querySelector('.logo'), img = logo && logo.querySelector('img');
+  if (!img) return;
+  var m = null, L, R;
+  function measure() {
+    try {
+      var w = img.naturalWidth, h = img.naturalHeight;
+      if (!w || !h) return;
+      var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      var cx = cv.getContext('2d'); cx.drawImage(img, 0, 0);
+      var d = cx.getImageData(0, 0, w, h).data;
+      function on(i) { return d[i + 3] > 60 && (d[i] + d[i + 1] + d[i + 2]) / 3 > 130; }
+      function col(x) {
+        var t = -1, b = -1, r = 0, g = 0, bl = 0, n = 0;
+        for (var y = 0; y < h; y++) {
+          var i = (y * w + x) * 4;
+          if (on(i)) { if (t < 0) t = y; b = y; r += d[i]; g += d[i + 1]; bl += d[i + 2]; n++; }
+        }
+        return t < 0 ? null : { t: t, b: b, n: n, r: r / n, g: g / n, bl: bl / n };
+      }
+      function side(x0, dir) {
+        var c0 = null; while (x0 >= 0 && x0 < w && !(c0 = col(x0))) x0 += dir;
+        if (!c0) return null;
+        var th = 0, r = 0, g = 0, b = 0, k = 0;
+        for (var s = 0; s < 4; s++) {
+          var c = col(x0 + dir * s); if (!c) continue;
+          th = Math.max(th, c.b - c.t + 1); r += c.r; g += c.g; b += c.bl; k++;
+        }
+        return { x: x0, c: (c0.t + c0.b + 1) / 2, th: th + 0.5,
+                 col: 'rgb(' + Math.round(r / k) + ',' + Math.round(g / k) + ',' + Math.round(b / k) + ')' };
+      }
+      var l = side(0, 1), r = side(w - 1, -1);
+      if (!l || !r) throw 0;
+      m = { h: h, l: l, r: r };
+      L = document.createElement('i'); R = document.createElement('i');
+      L.className = R.className = 'ln';
+      logo.appendChild(L); logo.appendChild(R);
+      place();
+    } catch (e) { logo.classList.add('fallback'); }
+  }
+  function place() {
+    if (!m) return;
+    var s = img.getBoundingClientRect().height / m.h, ox = img.offsetLeft, oy = img.offsetTop;
+    var tl = Math.max(1.2, m.l.th * s), tr = Math.max(1.2, m.r.th * s);
+    L.style.cssText = 'background:' + m.l.col + ';height:' + tl + 'px;top:' + (oy + m.l.c * s - tl / 2) + 'px;right:calc(100% - ' + (ox + (m.l.x + 1) * s) + 'px)';
+    R.style.cssText = 'background:' + m.r.col + ';height:' + tr + 'px;top:' + (oy + m.r.c * s - tr / 2) + 'px;left:' + (ox + m.r.x * s) + 'px';
+  }
+  if (img.complete && img.naturalWidth) measure(); else img.addEventListener('load', measure);
+  addEventListener('resize', place);
+})();
+
+/* 7. Day / night switch */
+(function () {
+  var b = document.getElementById('theme'), r = document.documentElement;
+  if (!b) return;
+  function apply(t) {
+    if (t === 'light') r.setAttribute('data-theme', 'light'); else r.removeAttribute('data-theme');
+    b.firstElementChild.className = t === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    b.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  }
+  apply(r.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  b.addEventListener('click', function () {
+    var t = r.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    apply(t);
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+})();

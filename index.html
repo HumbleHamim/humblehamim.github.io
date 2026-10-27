@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hamim Ahmed | Portfolio</title>
 <meta name="description" content="Hamim Ahmed, Data Science student building AI tools and applied software.">
+<script>try{if(localStorage.getItem("theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +25,7 @@
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button id="theme" class="theme-btn" type="button" aria-label="Switch to light mode"><i class="fa-solid fa-sun"></i></button>
   </div>
 </header>
 
@@ -35,7 +37,7 @@
   <div class="wrap">
     <p class="hello">Hi, I'm Hamim Ahmed.</p>
     <h1>I build AI tools and careful interfaces.</h1>
-    <blockquote class="motto">Chasing Pixel Perfection while letting my Creations take the center stage.</blockquote>
+    <blockquote class="motto">Chasing Pixel Perfection while letting my<br>Creations take center stage.</blockquote>
     <div class="btns">
       <a class="btn main" href="#projects">See my projects</a>
       <a class="btn alt" href="#contact">Get in touch</a>
@@ -69,14 +71,14 @@
         <h3>MU Live Bus Tracker</h3>
         <p>A live bus tracking tool for university students, so they can see where the bus is before they leave.</p>
         <div class="tags"><span>Web</span><span>Live tracking</span></div>
-        <a href="https://github.com/MrHamim1050">View on GitHub</a>
+        <a href="https://github.com/HumbleHamim">View on GitHub</a>
       </article>
 
       <article class="card">
         <h3>Uchcharonai</h3>
         <p>A Bangla speech and phoneme-check tool that helps people practice and check their pronunciation.</p>
         <div class="tags"><span>Speech</span><span>Bangla</span><span>AI</span></div>
-        <a href="https://github.com/MrHamim1050">View on GitHub</a>
+        <a href="https://github.com/HumbleHamim">View on GitHub</a>
       </article>
       <!-- END PROJECT CARD -->
 
@@ -107,6 +109,16 @@
         <h3>Data Entry Associate</h3>
         <p>Part-time remote data entry for Currys plc, verifying large volumes of records accurately and leading a team of 200 members.</p>
         <div class="tags"><span>Remote</span><span>Currys plc</span></div>
+      </article>
+      <article class="card">
+        <h3>Game Dev</h3>
+        <p>Build idle and incremental games featuring engaging mechanics and progression loops, with playable demos coming soon.</p>
+        <div class="tags"><span>Godot</span><span>GDScript</span><span>C#</span></div>
+      </article>
+      <article class="card">
+        <h3>Graphic Designer</h3>
+        <p>Design custom logos, banners, posters, and mockups to give brands a strong, clean, and professional look.</p>
+        <div class="tags"><span>Logos</span><span>Posters</span><span>Mockups</span></div>
       </article>
       <article class="card fbcard">
         <h3>Facebook Pages</h3>
@@ -147,16 +159,6 @@
           </div>
         </div>
       </article>
-      <article class="card">
-        <h3>Game Dev</h3>
-        <p>Build idle and incremental games featuring engaging mechanics and progression loops, with playable demos coming soon.</p>
-        <div class="tags"><span>Godot</span><span>GDScript</span><span>C#</span></div>
-      </article>
-      <article class="card">
-        <h3>Graphic Designer</h3>
-        <p>Design custom logos, banners, posters, and mockups to give brands a strong, clean, and professional look.</p>
-        <div class="tags"><span>Logos</span><span>Posters</span><span>Mockups</span></div>
-      </article>
     </div>
   </div>
 </section>
@@ -186,7 +188,7 @@
         <ul><li>Account Management</li><li>Subscription Management</li><li>Customer Service Management</li><li>Google Sheets</li><li>Leadership</li><li>English</li></ul>
       </div>
     </div>
-    <details class="certs" open>
+    <details class="certs">
       <summary>Certificates <span>2</span></summary>
       <ul class="certlist">
         <li><strong>Satellite Data Analytics with Power BI – Climate &amp; Environmental Intelligence</strong><span>Metropolitan University Geography and Astronomical Society · Jul 2026</span></li>
@@ -201,11 +203,12 @@
     <h2>Let's talk</h2>
     <p>Have a project, an idea, or an opportunity? Send me a message and I'll reply as soon as I can.</p>
     <div class="links">
-      <a class="btn main" href="mailto:hamimhb123@gmail.com"><i class="fa-solid fa-envelope"></i> Email me</a>
-      <a class="btn alt" href="https://www.linkedin.com/in/humblehamim" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-      <a class="btn alt" href="https://github.com/MrHamim1050" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-      <a class="btn alt" href="https://www.instagram.com/humble.breeze" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
-      <a class="btn alt" href="https://www.tiktok.com/@humble.breeze" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+      <a class="btn alt icon" href="https://www.facebook.com/ImHamimAhmed" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a class="btn alt icon" href="https://www.instagram.com/humble.hamim/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a class="btn alt icon" href="https://www.tiktok.com/@humble.hamim" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a class="btn alt icon" href="https://github.com/HumbleHamim" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a class="btn alt icon" href="https://www.linkedin.com/in/humblehamim/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a class="btn main icon" href="mailto:hamimhb123@gmail.com" aria-label="Email" title="Email"><i class="fa-solid fa-envelope"></i></a>
     </div>
   </div>
 </section>
