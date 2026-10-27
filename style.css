@@ -44,7 +44,7 @@ h2{font:700 clamp(1.8rem,4vw,2.5rem)/1.15 var(--display);letter-spacing:-.015em;
 .facts span:first-child{color:var(--ash)}
 
 /* projects */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),300px));gap:20px;justify-content:start;grid-auto-rows:1fr}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:20px;justify-content:start;align-items:start;grid-auto-flow:dense}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s}
 .card:hover{border-color:var(--green-deep)}
 .card h3{font:700 1.3rem var(--display)}
@@ -107,13 +107,38 @@ footer{padding:30px 0;color:var(--ash);font-size:.92rem}
 }
 
 @media(max-width:700px){.cards{justify-content:center}}
-@media(max-width:560px){.logo{display:none}header .wrap{justify-content:center}nav{gap:12px}nav a{font-size:.9rem}}
-
 .card{gap:12px}
-.more{background:none;border:0;padding:0;font:inherit;font-weight:600;cursor:pointer;text-align:left;width:max-content}
+.more{background:none;border:0;padding:0;font:inherit;font-weight:600;cursor:pointer;text-align:left;width:max-content;color:var(--green)}
 .more:hover{text-decoration:underline}
-.panel{margin-top:40px;padding-top:30px;border-top:1px solid var(--line)}
+
+/* navbar: logo hard left, links hard right (glass kept) */
+header .bar-in{display:flex;justify-content:space-between;align-items:center;height:62px;padding:0 clamp(14px,3vw,40px);gap:16px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo img{height:38px;width:auto;display:block}
+header nav{margin-left:auto}
+@media(max-width:520px){header nav{gap:12px}header nav a{font-size:.88rem}.logo{font-size:1rem}}
+@media(max-width:380px){header nav{gap:9px}header nav a{font-size:.8rem}}
+
+/* Facebook pages expand inside their own card */
+.card.fbcard.open{grid-column:1/-1}
+.card.fbcard:hover{transform:none}
+.panel{margin-top:6px;padding-top:20px;border-top:1px solid var(--line)}
 .panel[hidden]{display:none}
-.panel>h3{font:700 1.3rem var(--display);margin-bottom:20px}
-.cards.compact{grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),260px))}
-.cards.compact .card{padding:20px}
+.cards.compact{grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));grid-auto-rows:1fr;align-items:stretch;grid-auto-flow:row}
+.cards.compact .card{padding:18px;background:var(--bg)}
+.cards.compact .card:hover{transform:none}
+
+/* certificates dropdown */
+.certs{margin-top:44px;border-top:1px solid var(--line);padding-top:20px}
+.certs summary{cursor:pointer;font:700 1.3rem var(--display);list-style:none;display:flex;align-items:center;gap:12px}
+.certs summary::-webkit-details-marker{display:none}
+.certs summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(45deg);transition:transform .2s;margin-left:4px}
+.certs[open] summary::after{transform:rotate(-135deg)}
+.certs summary span{font:600 .85rem var(--body);background:#2d3331;border-radius:99px;padding:2px 10px;color:var(--silver)}
+.certlist{list-style:none;margin-top:16px;max-height:360px;overflow-y:auto;max-width:760px}
+.certlist li{padding:14px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.certlist strong{font-weight:600;color:var(--silver)}
+.certlist span{color:var(--ash);font-size:.93rem}
+
+/* contact icons */
+.links .btn i{margin-right:8px}

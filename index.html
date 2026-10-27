@@ -8,14 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="bar"></div>
 
 <header>
-  <div class="wrap">
-    <a class="logo" href="#top">Hamim Ahmed</a>
+  <div class="bar-in">
+    <a class="logo" href="#top" aria-label="Hamim Ahmed, home"><img src="logo.png" alt="" height="38" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><span hidden>Hamim Ahmed</span></a>
     <nav aria-label="Main">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -73,7 +74,7 @@
 
       <article class="card">
         <h3>Uchcharonai</h3>
-        <p>A Bangla speech and phoneme-check tool that helps people practice and check pronunciation. Built with team Kirrhadia.</p>
+        <p>A Bangla speech and phoneme-check tool that helps people practice and check their pronunciation.</p>
         <div class="tags"><span>Speech</span><span>Bangla</span><span>AI</span></div>
         <a href="https://github.com/MrHamim1050">View on GitHub</a>
       </article>
@@ -104,14 +105,47 @@
       </article>
       <article class="card">
         <h3>Data Entry Associate</h3>
-        <p>Part-time remote data entry role for Currys plc, processing and verifying large volumes of product and customer records with strict accuracy while leading a team of around 200 remote members.</p>
-        <div class="tags"><span>Remote</span><span>Currys plc</span><span>Leadership</span></div>
+        <p>Part-time remote data entry for Currys plc, verifying large volumes of records accurately and leading a team of 200 members.</p>
+        <div class="tags"><span>Remote</span><span>Currys plc</span></div>
       </article>
-      <article class="card">
+      <article class="card fbcard">
         <h3>Facebook Pages</h3>
-        <p>Control multiple pages across content, business, gaming, and community categories, managing content strategy, audience engagement, and daily operations.</p>
-        <div class="tags"><span>Content</span><span>Community</span><span>Business</span></div>
+        <p>Manage multiple pages across content, business, gaming, and community, handling strategy, engagement, and daily operations.</p>
         <button class="more" type="button" aria-expanded="false" aria-controls="pages-panel">View all pages</button>
+        <div id="pages-panel" class="panel" hidden>
+          <div class="cards compact">
+              <article class="card">
+                <h3>DSc Coven</h3>
+                <p>Manage a student-led educational community and content page for Data Science students at Metropolitan University.</p>
+                <a href="https://www.facebook.com/1062751756930092" target="_blank" rel="noopener">Visit page</a>
+              </article>
+              <article class="card">
+                <h3>HRS Team</h3>
+                <p>An online business run with two partners, built around affordable, trusted digital services for everyday users.</p>
+                <a href="https://www.facebook.com/218362291365627" target="_blank" rel="noopener">Visit page</a>
+              </article>
+              <article class="card">
+                <h3>Premium Education Hub</h3>
+                <p>Affordable premium access to study and productivity tools like ChatGPT, Gemini, Canva, Grammarly and Adobe.</p>
+                <a href="https://www.facebook.com/1070780342783674" target="_blank" rel="noopener">Visit page</a>
+              </article>
+              <article class="card">
+                <h3>Premium Streaming Hub</h3>
+                <p>Affordable premium streaming plans for entertainment, including YouTube Premium, Spotify, Netflix and Prime Video.</p>
+                <a href="https://www.facebook.com/617478764784424" target="_blank" rel="noopener">Visit page</a>
+              </article>
+              <article class="card">
+                <h3>HRS Luxeven</h3>
+                <p>Manage brand identity, daily operations, and business growth for a premium clothing line focused on timeless style.</p>
+                <a href="https://www.facebook.com/1470755589448457" target="_blank" rel="noopener">Visit page</a>
+              </article>
+              <article class="card">
+                <h3>RCL Empire</h3>
+                <p>Manage content and community engagement for a Minecraft team on the Cyanplex server.</p>
+                <a href="https://www.facebook.com/104432019343906" target="_blank" rel="noopener">Visit page</a>
+              </article>
+          </div>
+        </div>
       </article>
       <article class="card">
         <h3>Game Dev</h3>
@@ -123,47 +157,6 @@
         <p>Design custom logos, banners, posters, and mockups to give brands a strong, clean, and professional look.</p>
         <div class="tags"><span>Logos</span><span>Posters</span><span>Mockups</span></div>
       </article>
-    </div>
-    <div id="pages-panel" class="panel" hidden>
-      <h3>Facebook pages I run</h3>
-      <div class="cards compact">
-      <article class="card">
-        <h3>DSc Coven</h3>
-        <p>Manage a student-led educational community and content page for Data Science students at Metropolitan University.</p>
-        
-        <a href="https://www.facebook.com/1062751756930092" target="_blank" rel="noopener">Visit page</a>
-      </article>
-      <article class="card">
-        <h3>HRS Team</h3>
-        <p>An online business run with two partners, built around affordable, trusted digital services.</p>
-        
-        <a href="https://www.facebook.com/218362291365627" target="_blank" rel="noopener">Visit page</a>
-      </article>
-      <article class="card">
-        <h3>Premium Education Hub</h3>
-        <p>Affordable access to tools like ChatGPT, Gemini, Canva, Grammarly and Adobe.</p>
-        
-        <a href="https://www.facebook.com/1070780342783674" target="_blank" rel="noopener">Visit page</a>
-      </article>
-      <article class="card">
-        <h3>Premium Streaming Hub</h3>
-        <p>Affordable premium streaming plans, including YouTube Premium, Spotify and Netflix.</p>
-        
-        <a href="https://www.facebook.com/617478764784424" target="_blank" rel="noopener">Visit page</a>
-      </article>
-      <article class="card">
-        <h3>HRS Luxeven</h3>
-        <p>Manage brand identity, daily operations, and business growth for a premium clothing line focused on timeless style.</p>
-        
-        <a href="https://www.facebook.com/1470755589448457" target="_blank" rel="noopener">Visit page</a>
-      </article>
-      <article class="card">
-        <h3>RCL Empire</h3>
-        <p>Manage content and community engagement for a Minecraft team on the Cyanplex server.</p>
-        
-        <a href="https://www.facebook.com/104432019343906" target="_blank" rel="noopener">Visit page</a>
-      </article>
-      </div>
     </div>
   </div>
 </section>
@@ -192,11 +185,14 @@
         <h3>Business and People</h3>
         <ul><li>Account Management</li><li>Subscription Management</li><li>Customer Service Management</li><li>Google Sheets</li><li>Leadership</li><li>English</li></ul>
       </div>
-      <div>
-        <h3>Courses</h3>
-        <ul class="plain"><li>Satellite Data Analytics with Power BI: Climate and Environmental Intelligence</li><li>Using Generative and Agentic AI in the Literature Review</li></ul>
-      </div>
     </div>
+    <details class="certs" open>
+      <summary>Certificates <span>2</span></summary>
+      <ul class="certlist">
+        <li><strong>Satellite Data Analytics with Power BI – Climate &amp; Environmental Intelligence</strong><span>Metropolitan University Geography and Astronomical Society · Jul 2026</span></li>
+        <li><strong>Using Generative and Agentic AI in the Literature Review</strong><span>Elsevier Researcher Academy · Oct 2026</span></li>
+      </ul>
+    </details>
   </div>
 </section>
 
@@ -205,11 +201,11 @@
     <h2>Let's talk</h2>
     <p>Have a project, an idea, or an opportunity? Send me a message and I'll reply as soon as I can.</p>
     <div class="links">
-      <a class="btn main" href="mailto:hamimhb123@gmail.com">Email me</a>
-      <a class="btn alt" href="https://www.linkedin.com/in/humblehamim" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn alt" href="https://github.com/MrHamim1050" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn alt" href="https://www.instagram.com/humble.breeze" target="_blank" rel="noopener">Instagram</a>
-      <a class="btn alt" href="https://www.tiktok.com/@humble.breeze" target="_blank" rel="noopener">TikTok</a>
+      <a class="btn main" href="mailto:hamimhb123@gmail.com"><i class="fa-solid fa-envelope"></i> Email me</a>
+      <a class="btn alt" href="https://www.linkedin.com/in/humblehamim" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      <a class="btn alt" href="https://github.com/MrHamim1050" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a class="btn alt" href="https://www.instagram.com/humble.breeze" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      <a class="btn alt" href="https://www.tiktok.com/@humble.breeze" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i> TikTok</a>
     </div>
   </div>
 </section>

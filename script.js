@@ -139,15 +139,17 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
   });
 })();
 
-/* 5. "View all pages" dropdown */
+/* 5. Facebook card expands in place */
 (function () {
-  var b = document.querySelector('.more'), p = document.getElementById('pages-panel');
+  var card = document.querySelector('.card.fbcard');
+  var b = card && card.querySelector('.more'), p = document.getElementById('pages-panel');
   if (!b || !p) return;
   b.addEventListener('click', function () {
     var open = p.hidden;
     p.hidden = !open;
+    card.classList.toggle('open', open);
     b.setAttribute('aria-expanded', open);
     b.textContent = open ? 'Hide pages' : 'View all pages';
-    if (open) p.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+    if (open) card.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
   });
 })();
