@@ -26,7 +26,7 @@ nav a:hover{color:var(--green)}
 .hero a,.hero .btn{pointer-events:auto}
 .hello{color:var(--green);font-weight:600;margin-bottom:14px}
 h1{font:700 clamp(2.5rem,7vw,4.9rem)/1.04 var(--display);letter-spacing:-.025em;max-width:14ch}
-.motto{margin-top:30px;max-width:46ch;color:var(--ash);font-size:1.12rem;padding-left:18px;border-left:3px solid var(--green-deep)}
+.motto{margin-top:30px;max-width:46ch;color:var(--ash);font-size:1.12rem;padding-left:10px;border-left:3px solid var(--green-deep)}
 .btns{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
 .btn{display:inline-block;padding:12px 24px;border-radius:6px;font-weight:600;text-decoration:none;border:1px solid var(--line);transition:background .2s,border-color .2s}
 .btn.main{background:var(--green);color:#10281c;border-color:var(--green)}
