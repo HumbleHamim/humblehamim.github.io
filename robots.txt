@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://humblehamim.pages.dev/sitemap.xml

@@ -2,6 +2,14 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 var mouse = { x: innerWidth / 2, y: innerHeight / 2 };
 addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+var heroOn = true;
+(function () {
+  var hero = document.querySelector('.hero');
+  if (!hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (es) {
+    heroOn = es[0].isIntersecting; hero.classList.toggle('off', !heroOn);
+  }).observe(hero);
+})();
 
 /* 1. Pixel grid: squares glow near cursor and twinkle on their own */
 (function () {
@@ -44,6 +52,7 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
   c.parentElement.addEventListener('mousemove', light);
   c.parentElement.addEventListener('touchmove', light, { passive: true });
   if (!still) setInterval(function () {
+    if (!heroOn || document.hidden) return;
     cells[Math.floor(Math.random() * (w / S)) + ',' + Math.floor(Math.random() * (h / S))] = { a: 0.7 };
     kick();
   }, 350);
@@ -59,6 +68,7 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
   function px(gx, gy, col) { x.fillStyle = col; x.fillRect(gx * P, gy * P, P, P); }
   var leaves = [[7, -1], [11, 1], [15, -1], [19, 1]];
   function frame(now) {
+    if (!heroOn || document.hidden) { if (!still) requestAnimationFrame(frame); return; }
     var t = (now - t0) / 1000, g = still ? 1 : Math.min(1, t / 3.4);
     g = 1 - Math.pow(1 - g, 3);
     var r = c.getBoundingClientRect();
@@ -154,7 +164,7 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
   });
 })();
 
-/* 6. Logo lines: read the real end points of the swooshes from logo.png so they join exactly */
+/* 6. Logo lines: stretch the logo's own end pixels sideways, so the join is pixel-exact */
 (function () {
   var logo = document.querySelector('.logo'), img = logo && logo.querySelector('img');
   if (!img) return;
@@ -166,59 +176,94 @@ addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.cl
       var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
       var cx = cv.getContext('2d'); cx.drawImage(img, 0, 0);
       var d = cx.getImageData(0, 0, w, h).data;
-      function on(i) { return d[i + 3] > 60 && (d[i] + d[i + 1] + d[i + 2]) / 3 > 130; }
-      function col(x) {
-        var t = -1, b = -1, r = 0, g = 0, bl = 0, n = 0;
-        for (var y = 0; y < h; y++) {
-          var i = (y * w + x) * 4;
-          if (on(i)) { if (t < 0) t = y; b = y; r += d[i]; g += d[i + 1]; bl += d[i + 2]; n++; }
-        }
-        return t < 0 ? null : { t: t, b: b, n: n, r: r / n, g: g / n, bl: bl / n };
+      function n(x) {
+        var k = 0;
+        for (var y = 0; y < h; y++) { var i = (y * w + x) * 4; if (d[i + 3] > 60 && (d[i] + d[i + 1] + d[i + 2]) / 3 > 130) k++; }
+        return k;
       }
-      function side(x0, dir) {
-        var c0 = null; while (x0 >= 0 && x0 < w && !(c0 = col(x0))) x0 += dir;
-        if (!c0) return null;
-        var th = 0, r = 0, g = 0, b = 0, k = 0;
-        for (var s = 0; s < 4; s++) {
-          var c = col(x0 + dir * s); if (!c) continue;
-          th = Math.max(th, c.b - c.t + 1); r += c.r; g += c.g; b += c.bl; k++;
-        }
-        return { x: x0, c: (c0.t + c0.b + 1) / 2, th: th + 0.5,
-                 col: 'rgb(' + Math.round(r / k) + ',' + Math.round(g / k) + ',' + Math.round(b / k) + ')' };
+      function edge(x0, dir) {
+        while (x0 >= 0 && x0 < w && !n(x0)) x0 += dir;
+        if (x0 < 0 || x0 >= w) return -1;
+        var best = 0, c = [];
+        for (var s = 0; s < 8; s++) { var x = x0 + dir * s; c.push(x >= 0 && x < w ? n(x) : 0); best = Math.max(best, c[s]); }
+        for (s = 0; s < 8; s++) if (c[s] >= best * 0.85) return x0 + dir * s;
+        return x0;
       }
-      var l = side(0, 1), r = side(w - 1, -1);
-      if (!l || !r) throw 0;
-      m = { h: h, l: l, r: r };
-      L = document.createElement('i'); R = document.createElement('i');
+      var xl = edge(0, 1), xr = edge(w - 1, -1);
+      if (xl < 0 || xr < 0) throw 0;
+      m = { h: h, xl: xl, xr: xr };
+      L = document.createElement('canvas'); R = document.createElement('canvas');
       L.className = R.className = 'ln';
-      logo.appendChild(L); logo.appendChild(R);
-      place();
+      logo.insertBefore(L, img); logo.insertBefore(R, img);
+      draw();
     } catch (e) { logo.classList.add('fallback'); }
   }
-  function place() {
+  function draw() {
     if (!m) return;
-    var s = img.getBoundingClientRect().height / m.h, ox = img.offsetLeft, oy = img.offsetTop;
-    var tl = Math.max(1.2, m.l.th * s), tr = Math.max(1.2, m.r.th * s);
-    L.style.cssText = 'background:' + m.l.col + ';height:' + tl + 'px;top:' + (oy + m.l.c * s - tl / 2) + 'px;right:calc(100% - ' + (ox + (m.l.x + 1) * s) + 'px)';
-    R.style.cssText = 'background:' + m.r.col + ';height:' + tr + 'px;top:' + (oy + m.r.c * s - tr / 2) + 'px;left:' + (ox + m.r.x * s) + 'px';
+    var r = img.getBoundingClientRect(), hh = r.height, s = hh / m.h;
+    var ox = img.offsetLeft, oy = img.offsetTop, ww = innerWidth, dpr = Math.min(devicePixelRatio || 1, 3);
+    [[L, m.xl], [R, m.xr]].forEach(function (p, i) {
+      var c = p[0];
+      c.width = Math.round(ww * dpr); c.height = Math.round(hh * dpr);
+      c.style.width = ww + 'px'; c.style.height = hh + 'px'; c.style.top = oy + 'px';
+      c.getContext('2d').drawImage(img, p[1], 0, 1, m.h, 0, 0, c.width, c.height);
+      if (i === 0) c.style.right = 'calc(100% - ' + (ox + (p[1] + 1) * s) + 'px)';
+      else c.style.left = (ox + p[1] * s) + 'px';
+    });
   }
   if (img.complete && img.naturalWidth) measure(); else img.addEventListener('load', measure);
-  addEventListener('resize', place);
+  addEventListener('resize', draw);
 })();
 
-/* 7. Day / night switch */
+/* 7. Day / night switch: circular wipe, animated sun/moon, twinkling stars */
 (function () {
   var b = document.getElementById('theme'), r = document.documentElement;
+  var st = document.querySelector('.stars');
+  if (st) for (var i = 0; i < 46; i++) {
+    var e = document.createElement('i'), z = 1 + Math.random() * 2;
+    e.className = 'star';
+    e.style.cssText = 'left:' + (Math.random() * 100) + '%;top:' + (Math.random() * 75) + '%;width:' + z + 'px;height:' + z + 'px;animation-delay:' + (Math.random() * 4).toFixed(2) + 's;animation-duration:' + (2 + Math.random() * 3).toFixed(2) + 's';
+    st.appendChild(e);
+  }
   if (!b) return;
   function apply(t) {
     if (t === 'light') r.setAttribute('data-theme', 'light'); else r.removeAttribute('data-theme');
-    b.firstElementChild.className = t === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
     b.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
   }
   apply(r.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
   b.addEventListener('click', function () {
     var t = r.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    apply(t);
     try { localStorage.setItem('theme', t); } catch (e) {}
+    if (still) { apply(t); return; }
+    if (document.startViewTransition) {
+      var q = b.getBoundingClientRect(), x = q.left + q.width / 2, y = q.top + q.height / 2;
+      var rad = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      var vt = document.startViewTransition(function () { apply(t); });
+      vt.ready.then(function () {
+        r.animate({ clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + rad + 'px at ' + x + 'px ' + y + 'px)'] },
+                  { duration: 750, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' });
+      });
+    } else {
+      r.classList.add('theming'); apply(t);
+      setTimeout(function () { r.classList.remove('theming'); }, 600);
+    }
   });
+})();
+
+/* 8. Active menu link + back-to-top button */
+(function () {
+  var links = {};
+  document.querySelectorAll('header nav a').forEach(function (a) { links[a.getAttribute('href')] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        for (var k in links) links[k].classList.remove('on');
+        if (links['#' + e.target.id]) links['#' + e.target.id].classList.add('on');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
+  }
+  var t = document.getElementById('totop');
+  if (t) addEventListener('scroll', function () { t.classList.toggle('show', scrollY > 700); }, { passive: true });
 })();

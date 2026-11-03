@@ -233,3 +233,22 @@ img{max-width:100%}
 .nf p{color:var(--ash)}
 .nf .btn{justify-self:center;margin-top:10px}
 @media(max-width:520px){.motto br{display:none}}
+
+/* anchors clear the sticky header */
+html{scroll-padding-top:62px}
+@media(max-width:600px){html{scroll-padding-top:92px}}
+
+/* inline icons */
+.icon-btn svg{width:1.35rem;height:1.35rem;fill:currentColor;display:block}
+
+/* active menu link */
+header nav a.on{color:var(--green)}
+
+/* back to top */
+#totop{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--silver);display:grid;place-content:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,border-color .2s,color .2s;z-index:15}
+#totop svg{width:20px;height:20px}
+#totop.show{opacity:1;transform:none;pointer-events:auto}
+#totop:hover{border-color:var(--green);color:var(--green)}
+
+/* save battery: freeze sky animation when hero is off screen */
+.hero.off .sky *{animation-play-state:paused}
